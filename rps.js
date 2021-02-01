@@ -3,7 +3,6 @@ const possibilities = ["rock", "paper", "scissors"];
 function computerPlay() {
     return possibilities[Math.round(Math.random()*2)];
 }
-const computerSelection = computerPlay();
 
 function playerPlay() {
     let selection = "";
@@ -15,17 +14,19 @@ function playerPlay() {
     }
     return selection
 }
-const playerSelection = playerPlay();
 
-function playRound(playerSelection, computerSelection) {
+function playRound() {
+    let playerSelection=playerPlay();
+    let computerSelection=computerPlay();    
+    console.log(`Player selected ${playerSelection}`);
+    console.log(`Computer selected ${computerSelection}`)
     let winner="";    
-    let outcome="";
     if(playerSelection=="rock") {
         if(computerSelection=="rock") {
             winner="tie";
         } else if(computerSelection=="paper") {
             winner="computer";
-        } else {
+        } else if(computerSelection=="scissors") {
             winner="player";
         }
     } else if(playerSelection=="paper") {
@@ -33,7 +34,7 @@ function playRound(playerSelection, computerSelection) {
             winner="player";
         } else if(computerSelection=="paper") {
             winner="tie";
-        } else {
+        } else if(computerSelection="scissors") {
             winner="computer"
         }
     } else if(playerSelection=="scissors") {
@@ -41,48 +42,45 @@ function playRound(playerSelection, computerSelection) {
             winner="computer";
         } else if(computerSelection=="paper") {
             winner="player";
-        } else {
+        } else if(computerSelection=="scissors") {
             winner="tie";
         }
     }
-    if(winner=="tie") {
-        outcome=`It's a tie!`
-    } else if(winner="player") {
-        outcome=`You win! ${playerSelection} beats ${computerSelection}.`
-    } else if(winner="computer") {
-        outcome=`>You lose! ${computerSelection} beats ${playerSelection}`
+
+    let outcome = "";
+    if(winner=="player") {
+        outcome=`You won! ${playerSelection} beats ${computerSelection}`
+    } else if(winner=="computer") {
+        outcome=`You lost! ${computerSelection} beats ${playerSelection}`
+    } else if(winner=="tie") {
+        outcome=`It's a tie! ${computerSelection} does not beat ${playerSelection}`
     }
-    return outcome
+    console.log(outcome);
+    return outcome;
 }
 
 function game() {
-    let playerScore=0;
-    let computerScore=0;
-    let finalOutcome="";
-    console.log("The game begins!");
-    console.log(playerScore);
+    let playerScore = 0;
+    let computerScore = 0;
+    let singleOutcome = "";
+    let finalOutcome = "";
     while((playerScore<5) && (computerScore<5)) {
-    let singleOutcome = playRound(playerSelection, computerSelection);    
-        console.log(singleOutcome) 
-        console.log(singleOutcome.includes("You win!"))
-        if(singleOutcome.includes("You win!") == true) {
+        singleOutcome = playRound();
+        if(singleOutcome.includes("You won")) {
             playerScore++;
-            singleOutcome = "";
-        } else if(singleOutcome.includes("You lose!") == true) {
+        } else if(singleOutcome.includes("You lost")) {
             computerScore++;
-            singleOutcome = "";
-        } else if(singleOutcome.includes("It's a tie!") == true) {
-            continue;
-            singleOutcome = "";
         }
+        console.log(`Player score: ${playerScore}`);
+        console.log(`Computer score: ${computerScore}`);
+        console.log("--------------------------------")
     }
-    console.log(playerScore);
     if(playerScore==5) {
-        finalOutcome=`You scored ${playerScore} and won against computer, who scored ${computerScore}!`;
+        finalOutcome="You were the first to get 5 points. You win!";
     } else if(computerScore==5) {
-        finalOutcome=`You scored ${playerScore} and lost against computer, who scored ${computerScore}!`;
+        finalOutcome="Computer was the first to get 5 points. You lose!";
     }
-    return(finalOutcome);
+    return finalOutcome;
 }
 
 console.log(game())
