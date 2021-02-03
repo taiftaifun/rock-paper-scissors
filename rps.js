@@ -1,20 +1,16 @@
 const possibilities = ["rock", "paper", "scissors"];
+const buttons = Array.from(document.querySelectorAll("button"));
+buttons.forEach(button => button.addEventListener("click", playerPlay));
 
 function computerPlay() {
     return possibilities[Math.round(Math.random()*2)];
 }
 
-function playerPlay() {
-    let selection = "";
-    while(!possibilities.includes(selection)) {
-        selection = prompt(`Please type in to select one of the following:
-        1) rock
-        2) paper
-        3) scissors`).toLowerCase()
-    }
-    return selection
+function playerPlay(e) {
+    return(e.target.id);
 }
 
+/*
 function playRound() {
     let playerSelection=playerPlay();
     let computerSelection=computerPlay();    
@@ -82,5 +78,4 @@ function game() {
     }
     return finalOutcome;
 }
-
-console.log(game())
+*/
