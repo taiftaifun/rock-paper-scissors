@@ -4,12 +4,27 @@
 }
 
 #btn-container {
-    margin: 5% auto;
-    width: 20%;
+    margin: 2% auto;
+    width: 30%;
     display: flex;
     justify-content: space-around;
+    background-color: lawngreen;
 }
 
 button {
     width: 30%;
+}
+
+
+#curr-result {
+    background-color: yellow;
+    text-align: center;
+    height: 5rem;
+    padding: 1rem 0;
+}
+
+#scoreboard {
+    background-color: indianred;
+    text-align: center;
+    height: 10%;
 }
