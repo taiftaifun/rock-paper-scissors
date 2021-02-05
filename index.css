@@ -3,18 +3,25 @@
     padding: 0;
 }
 
-#btn-container {
+.btn-container {
     margin: 2% auto;
     width: 30%;
     display: flex;
     justify-content: space-around;
-    background-color: lawngreen;
 }
 
 button {
     width: 30%;
 }
 
+#play-again {
+    margin: 2% auto;
+    width: 25%;
+}
+
+#play-again {
+    visibility: hidden;
+}
 
 #curr-result {
     background-color: yellow;

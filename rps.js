@@ -3,17 +3,29 @@ let playerScore = 0;
 let computerScore = 0;
 
 // define the dynamic DOM elements
-let playerChoiceDiv = document.querySelector("#player-choice");
-let computerChoiceDiv = document.querySelector("#computer-choice");
-let roundOutcomeDiv = document.querySelector("#round-outcome");
-let playerScoreDiv = document.querySelector("#player-score");
-let computerScoreDiv = document.querySelector("#computer-score");
-let scoreboardDiv = document.querySelector("#scoreboard");
-// let scoreboardDivInitial = document.querySelector("#scoreboard").innerHTML();
+const playerChoiceDiv = document.querySelector("#player-choice");
+const computerChoiceDiv = document.querySelector("#computer-choice");
+const roundOutcomeDiv = document.querySelector("#round-outcome");
+const playerScoreDiv = document.querySelector("#player-score");
+const computerScoreDiv = document.querySelector("#computer-score");
+const scoreboardDiv = document.querySelector("#scoreboard");
+const playAgainBtn = document.querySelector("#play-again");
+const initialScoreboardDiv = scoreboardDiv.cloneNode(true);
+
 
 // add events listeners to the buttons pressed by the player
-const buttons = Array.from(document.querySelectorAll("button"));
+const buttons = Array.from(document.querySelectorAll(".game-btn"));
 buttons.forEach(button => button.addEventListener("click", playRound));
+
+// add event listener to the 'play again' button
+playAgainBtn.addEventListener("click", resetGame);
+function resetGame() {
+    computerScore = 0;
+    playerScore = 0;
+    playAgainBtn.setAttribute("style", "visibility: hidden");
+    buttons.forEach(button => button.disabled = false);
+    scoreboardDiv.innerHTML = initialScoreboardDiv.innerHTML;
+}
 
 // define the random computer choice
 const possibilities = ["rock", "paper", "scissors"];
@@ -74,18 +86,17 @@ function playRound(e) {
     roundOutcomeDiv.textContent = `${outcome}`;
     updateScore(outcome);
     
-    // if(playerScore==5) {
-    //     scoreboardDiv.textContent = "You were the first to get the 5 points, you win!";
-    //     await new Promise(r => setTimeout(r, 2));
-    //     computerScore = 0;
-    //     playerScore = 0;
-    // } else if(computerScore==5) {
-    //     scoreboardDiv.textContent = "The computer was the first to get the 5 points, you lose!";
-    //     await new Promise(r => setTimeout(r, 2));
-    //     scoreboardDiv.innerHTML = scoreboardDivInitial;
-    //     computerScore = 0;
-    //     playerScore = 0;
-    // }
+    if(playerScore == 5 || computerScore == 5) {
+        let finalMessage = "";
+        if(playerScore == 5) {
+            finalMessage = "You were the first to get 5 points, you win!"
+        } else if(computerScore == 5) {
+            finalMessage = "Computer was the first to get 5 points, you lost!"
+        }
+        scoreboardDiv.textContent = finalMessage;
+        buttons.forEach(button => button.disabled = true);
+        playAgainBtn.setAttribute("style", "visibility: visible");      
+    }
 }
 
 // define the score update mechanism
