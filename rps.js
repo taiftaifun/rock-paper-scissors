@@ -22,92 +22,96 @@ playAgainBtn.addEventListener("click", resetGame);
 function resetGame() {
     computerScore = 0;
     playerScore = 0;
+    playerScoreDiv.textContent = playerScore;
+    computerScoreDiv.textContent = computerScore
     playAgainBtn.setAttribute("style", "visibility: hidden");
     buttons.forEach(button => button.disabled = false);
-    scoreboardDiv.innerHTML = initialScoreboardDiv.innerHTML;
+    document.querySelector("#final-message").remove();
+
 }
 
 // define the random computer choice
 const possibilities = ["rock", "paper", "scissors"];
 function computerPlay() {
-    return possibilities[Math.round(Math.random()*2)];
+    return possibilities[Math.round(Math.random() * 2)];
 }
 
 // define the generation of player's choice upon click
 function playerPlay(e) {
-    let choice = e.target.id; 
-    return(choice);
+    let choice = e.target.id;
+    return (choice);
 }
 
 // define the function playing out a single round
 function playRound(e) {
-    let playerSelection=playerPlay(e);
-    let computerSelection=computerPlay();
-    console.log(`Player selected ${playerSelection}`);
-    console.log(`Computer selected ${computerSelection}`)
-    let winner="";    
-    if(playerSelection=="rock") {
-        if(computerSelection=="rock") {
-            winner="tie";
-        } else if(computerSelection=="paper") {
-            winner="computer";
-        } else if(computerSelection=="scissors") {
-            winner="player";
+    let playerSelection = playerPlay(e);
+    let computerSelection = computerPlay();
+    let winner = "";
+    if (playerSelection == "rock") {
+        if (computerSelection == "rock") {
+            winner = "tie";
+        } else if (computerSelection == "paper") {
+            winner = "computer";
+        } else if (computerSelection == "scissors") {
+            winner = "player";
         }
-    } else if(playerSelection=="paper") {
-        if(computerSelection=="rock") {
-            winner="player";
-        } else if(computerSelection=="paper") {
-            winner="tie";
-        } else if(computerSelection="scissors") {
-            winner="computer"
+    } else if (playerSelection == "paper") {
+        if (computerSelection == "rock") {
+            winner = "player";
+        } else if (computerSelection == "paper") {
+            winner = "tie";
+        } else if (computerSelection = "scissors") {
+            winner = "computer"
         }
-    } else if(playerSelection=="scissors") {
-        if(computerSelection=="rock") {
-            winner="computer";
-        } else if(computerSelection=="paper") {
-            winner="player";
-        } else if(computerSelection=="scissors") {
-            winner="tie";
+    } else if (playerSelection == "scissors") {
+        if (computerSelection == "rock") {
+            winner = "computer";
+        } else if (computerSelection == "paper") {
+            winner = "player";
+        } else if (computerSelection == "scissors") {
+            winner = "tie";
         }
     }
 
     let outcome = "";
-    if(winner=="player") {
-        outcome=`You won! ${playerSelection} beats ${computerSelection}`
-    } else if(winner=="computer") {
-        outcome=`You lost! ${computerSelection} beats ${playerSelection}`
-    } else if(winner=="tie") {
-        outcome=`It's a tie! ${computerSelection} does not beat ${playerSelection}`
+    if (winner == "player") {
+        outcome = `You won! ${playerSelection} beats ${computerSelection}`
+    } else if (winner == "computer") {
+        outcome = `You lost! ${computerSelection} beats ${playerSelection}`
+    } else if (winner == "tie") {
+        outcome = `It's a tie! ${computerSelection} does not beat ${playerSelection}`
     }
-    
+
     playerChoiceDiv.textContent = `Player selected ${playerSelection}`
     computerChoiceDiv.textContent = `Computer selected ${computerSelection}`
     roundOutcomeDiv.textContent = `${outcome}`;
     updateScore(outcome);
-    
-    if(playerScore == 5 || computerScore == 5) {
+
+    if (playerScore == 5 || computerScore == 5) {
         let finalMessage = "";
-        if(playerScore == 5) {
+        if (playerScore == 5) {
             finalMessage = "You were the first to get 5 points, you win!"
-        } else if(computerScore == 5) {
+        } else if (computerScore == 5) {
             finalMessage = "Computer was the first to get 5 points, you lost!"
         }
-        scoreboardDiv.textContent = finalMessage;
         buttons.forEach(button => button.disabled = true);
-        playAgainBtn.setAttribute("style", "visibility: visible");      
+        playAgainBtn.setAttribute("style", "visibility: visible");
+        let finalMessageDiv = document.createElement("div");
+        finalMessageDiv.setAttribute("id", "final-message")
+        finalMessageDiv.textContent = finalMessage; 
+        scoreboardDiv.appendChild(finalMessageDiv);
     }
 }
 
 // define the score update mechanism
 function updateScore(outcome) {
     let finalOutcome = "";
-        let singleOutcome = outcome;
-        if(singleOutcome.includes("You won")) {
-            playerScore++;
-        } else if(singleOutcome.includes("You lost")) {
-            computerScore++;
-        }
-        playerScoreDiv.textContent = playerScore;
-        computerScoreDiv.textContent = computerScore;
+    let singleOutcome = outcome;
+    if (singleOutcome.includes("You won")) {
+        playerScore++;
+    } else if (singleOutcome.includes("You lost")) {
+        computerScore++;
+    }
+    playerScoreDiv.textContent = playerScore;
+    computerScoreDiv.textContent = computerScore;
 }

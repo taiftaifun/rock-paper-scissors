@@ -3,19 +3,20 @@
     padding: 0;
 }
 
+
 .btn-container {
-    margin: 2% auto;
+    margin: 1em auto;
     width: 30%;
     display: flex;
     justify-content: space-around;
 }
 
 button {
-    width: 30%;
+    width: 7em;
 }
 
 #play-again {
-    margin: 2% auto;
+    margin: 1em auto;
     width: 25%;
 }
 
@@ -24,14 +25,26 @@ button {
 }
 
 #curr-result {
-    background-color: yellow;
     text-align: center;
-    height: 5rem;
-    padding: 1rem 0;
+    height: 7em;
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #scoreboard {
-    background-color: indianred;
     text-align: center;
-    height: 10%;
+    height: 7em;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#game-wrapper {
+    margin: 5% auto;
+    border: aquamarine;
+    border-style: solid;
+    border-width: 1em;
+    width: 60%;
 }

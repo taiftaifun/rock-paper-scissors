@@ -3,22 +3,26 @@
     <link href="index.css" rel="stylesheet"> 
 </head>
 <body>
-    <div id="scoreboard">
-        <div>Player score: <span id="player-score">0</span></div>
-        <div>Computer score: <span id="computer-score">0</span></div>
-    </div>
-    <div id="curr-result">
-        <div id="player-choice"></div>
-        <div id="computer-choice"></div>
-        <div id="round-outcome"></div>
-    </div>    
-    <div class="btn-container">
-        <button id="rock" class="game-btn">ROCK</button>
-        <button id="paper" class="game-btn">PAPER</button>
-        <button id="scissors" class="game-btn">SCISSORS</button>
-    </div>
-    <div class="btn-container" id="play-again-container">
-        <button id="play-again">Play again</button>
+    <div id="game-wrapper">
+        <div id="scoreboard">
+            <h1>SCOREBOARD</h1>
+            <div>Player score: <span id="player-score">0</span></div>
+            <div>Computer score: <span id="computer-score">0</span></div>
+        </div>
+        <div id="curr-result">
+            <h1>CURRENT ROUND</h1>
+            <div id="player-choice"></div>
+            <div id="computer-choice"></div>
+            <div id="round-outcome"></div>
+        </div>    
+        <div class="btn-container">
+            <button id="rock" class="game-btn">ROCK</button>
+            <button id="paper" class="game-btn">PAPER</button>
+            <button id="scissors" class="game-btn">SCISSORS</button>
+        </div>
+        <div class="btn-container" id="play-again-container">
+            <button id="play-again">Play again</button>
+        </div>
     </div>
 </body>
 <script src="rps.js"></script>
